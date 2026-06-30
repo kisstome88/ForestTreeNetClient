@@ -1,0 +1,52 @@
+# ────────────── Java / Maven ──────────────
+*.class
+*.jar
+!lib/*.jar
+*.war
+*.ear
+
+target/
+build/
+out/
+dist/
+*.classpath
+*.project
+*.settings/
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+
+# ────────────── Logs & temp ──────────────
+*.log
+logs/
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# ────────────── OS ──────────────
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+[Tt]humbs.db
+Desktop.ini
+
+# ────────────── Secrets (do not commit) ──────────────
+.env
+.env.local
+*.pem
+*.key
+secrets/
+credentials.*
+
+# ────────────── Build output of examples ──────────────
+examples/**/target/
+examples/**/*.class
