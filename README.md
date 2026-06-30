@@ -78,18 +78,58 @@
 
 ### What is this?
 
-`BtTreeGauge` (a.k.a. `forest-tree-net-client`) is a Java client library that wraps the HTTP API of the **Forest Tree Net** platform — a forest-resource monitoring system built around BLE/LoRa tree-diameter sensors and gateways. The SDK is published by **Sichuan Enternet Technology Co., Ltd.** (四川恩特网联科技有限公司) and exposes a thin, type-safe façade over the platform's JSON endpoints.
+Forest field surveys are the foundation of forest-resource management and ecological research — but the traditional **tape-measure + handwriting** workflow has long been plagued by **low efficiency, large errors, and high cost**. Crews must crouch among dense undergrowth, pull a tape around every trunk, and write down each reading; a single tree takes more than **5 minutes** to measure, and the combined reading + transcription error reaches as high as **18%**, severely undermining the accuracy of inventory and monitoring work.
 
-It is intended for system integrators, researchers, and forestry-application developers who need to pull monitoring data (sample plots, sample trees, sensor readings, etc.) into their own Java applications, ETL pipelines, or dashboards.
+The **Tree DBH Growth Monitor** (树木胸径生长监测仪) replaces that workflow with an industrial-grade displacement sensor running 7×24, powered by a high-density lithium cell, and mounted in 30 seconds via a strap that does not damage the bark. A job that used to take a full field team can now be done by **one person in one day**, with **99.9%** data accuracy.
+
+This repository — `forest-tree-net-client` (a.k.a. `ForestTreeNetClient`) — is the **official Java client SDK** for the **Forest Tree Net** platform that backs those sensors. It wraps the platform's HTTP API in a handful of static methods, so any Java application, ETL pipeline, or dashboard can pull sample plots, sample trees, tree-diameter devices, and historical sensor data without dealing with HTTP, JSON, or token plumbing.
+
+It is intended for system integrators, researchers, and forestry-application developers who need to integrate forestry-IoT data into their own systems.
 
 ### Features
+
+#### 📦 SDK features
 
 - 🚀 **Zero-boilerplate** — A handful of static methods; no DI, no Spring, no configuration files required.
 - 🔐 **Token-based auth** — Built-in `login()` handles authentication; the returned token is reused across calls.
 - 📋 **Five core endpoints covered** — Sample plots, sample trees, tree-diameter devices, sensor history, and a generic `post()` escape hatch.
 - 🧰 **Sensible defaults** — Server URL can be set via classpath properties, JVM system property, or environment variable.
 - ⚙️ **Pluggable HTTP client** — Bring your own `org.apache.http.client.HttpClient` if you need custom TLS / proxy / pooling behavior.
-- 📦 **Tiny surface** — Ships as a single ~2 MB fat-JAR with shaded Apache HttpClient, FastJSON, and SLF4J.
+- ⚖️ **Tiny surface** — Ships as a single ~2 MB fat-JAR with shaded Apache HttpClient, FastJSON, and SLF4J.
+
+#### 🎯 Hardware product features
+
+- 🎯 **Millimeter accuracy** — Industrial-grade displacement sensor, error ≤ ±1 mm (vs ~18% with tape).
+- ⏱️ **7×24 continuous monitoring** — Fully automated periodic sampling and upload.
+- 🔋 **≥10-year battery life** — High-density lithium cell, designed for long-term unattended deployment.
+- 📡 **Multi-radio** — 4G / NB-IoT / LoRa, field-selectable.
+- 📊 **Smart data management** — Automatic growth curves, visualization, compliance-grade export.
+- 🌲 **30-second non-invasive install** — Strap-mounted, <200 g, no drilling, no bark damage.
+
+#### 🌲 What changes vs. traditional measurement
+
+- ✅ **Less labor** — Eliminates repeated field visits for DBH re-measurement.
+- ✅ **Continuous data** — Captures long-term tree-growth dynamics, not single point-in-time snapshots.
+- ✅ **Better consistency** — Removes human reading and transcription errors.
+- ✅ **Higher management efficiency** — Auto-upload and centralized data management.
+- ✅ **Lower total cost** — Fewer field trips, lower O&M overhead.
+- ✅ **Multi-scenario ready** — Suitable for carbon-sink, national-reserve-forest, and sample-plot monitoring programs.
+
+### Typical applications
+
+| Scenario | What it enables |
+| --- | --- |
+| 🌲 **State forest resource monitoring** | Continuous growth monitoring across all stands; supports annual forest-resource updates. |
+| 🏛️ **National reserve forest management** | Multi-year growth models and compliance reporting. |
+| 🌍 **Forest carbon sink monitoring** | Continuous DBH increment → biomass / carbon stock estimation; supports carbon-credit projects. |
+| 🌳 **Ancient & heritage tree protection** | Per-tree long-term health trends; early warning of growth anomalies and risk. |
+| 🔬 **Long-term sample-plot monitoring** | Research-grade continuous time series for universities and research institutes. |
+| 🏙️ **Urban greening & ecological engineering** | City-tree growth-state monitoring and refined maintenance. |
+| ⚠️ **Tree-fall risk early warning** | Real-time tilt-based risk monitoring and alerting. |
+
+👉 Full product overview, specs, and case studies: [docs/PRODUCT.md](./docs/PRODUCT.md) · [docs/USE_CASES.md](./docs/USE_CASES.md)
+
+> 📞 **After-sales**: Sichuan Enternet Technology Co., Ltd. — 139 0818 4356
 
 ### Quick start
 
@@ -161,7 +201,7 @@ Then add to your `pom.xml`:
 ### Project layout
 
 ```
-BtTreeGauge/
+ForestTreeNetClient/
 ├── lib/                          # Prebuilt fat-JAR (shaded dependencies)
 │   └── forest-tree-net-client-1.0.0.jar
 ├── docs/                         # All documentation
@@ -202,7 +242,7 @@ This project is released under the [MIT License](./LICENSE).
 
 ### 这是什么？
 
-`BtTreeGauge`（又名 `forest-tree-net-client`）是一个 Java 客户端 SDK，用于对接**森林树径监测平台**的 HTTP 接口。该平台围绕 BLE/LoRa 树径传感器和网关构建，服务于林业资源监测场景。本 SDK 由**四川恩特网联科技有限公司**发布，在平台 JSON 接口之上提供了一层简洁、类型安全的封装。
+`ForestTreeNetClient`（又名 `forest-tree-net-client`）是一个 Java 客户端 SDK，用于对接**森林树径监测平台**的 HTTP 接口。该平台围绕 BLE/LoRa 树径传感器和网关构建，服务于林业资源监测场景。本 SDK 由**四川恩特网联科技有限公司**发布，在平台 JSON 接口之上提供了一层简洁、类型安全的封装。
 
 适合需要在自有 Java 应用、ETL 流水线或可视化大屏中拉取样地、样木、设备、历史监测数据等的系统集成商、研究人员和林业应用开发者使用。
 
@@ -285,7 +325,7 @@ mvn install:install-file \
 ### 项目结构
 
 ```
-BtTreeGauge/
+ForestTreeNetClient/
 ├── lib/                          # 预编译 fat-JAR（已 shade 依赖）
 │   └── forest-tree-net-client-1.0.0.jar
 ├── docs/                         # 全部文档
