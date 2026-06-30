@@ -1,38 +1,51 @@
 <div align="center">
 
-# BtTreeGauge / Forest Tree Net Client
+# 树木胸径生长监测仪 / 树径测量仪
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Java Version](https://img.shields.io/badge/Java-1.8%2B-blue.svg)](https://www.java.com)
 [![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](./CHANGELOG.md)
 [![JAR Size](https://img.shields.io/badge/JAR-2.1%20MB-lightgrey.svg)](./lib/)
 
-A lightweight Java SDK for talking to the **Forest Tree Net** (森林树径监测) monitoring platform — query sample plots, sample trees, tree-diameter devices, and historical sensor data with a few lines of code.
+一个面向**森林树径监测平台**的轻量级 Java SDK —— 几行代码即可完成登录、查询样地、查询样木、查询树径设备、拉取历史监测数据等操作，让你的 Java 应用快速接入林业物联网数据。
 
-[English](#english) · [中文](#中文) · [产品介绍 / Product](#产品介绍--product)
+[English](#english) · [中文](#中文) · [产品介绍](#产品介绍)
 
 </div>
 
 ---
 
-## 产品介绍 / Product
+## 产品介绍
 
 > **树木胸径生长监测仪 —— 一次安装，守护十年**
 
-This SDK is the **software side** of an end-to-end forest-monitoring solution. The hardware counterpart is the **Tree DBH Growth Monitor** (树木胸径生长监测仪), a strap-mounted, industrial-grade displacement sensor built by **Sichuan Enternet Technology** (四川恩特网联科技有限公司). The sensor samples DBH 7×24, uploads over 4G / NB-IoT / LoRa, and feeds data into the Forest Tree Net platform — which is exactly what this SDK queries.
+林业外业调查是林草资源管理与生态科研的基石，但传统"皮尺 + 手写"模式长期深陷**效率低、误差大、成本高**三大困境：队员需在密林中弯腰拉尺、屈膝记录，单株测量耗时超 5 分钟；肉眼读数偏差与手写笔误，更让数据偏离度高达 **18%**，严重影响普查与监测的准确性。
+
+**树木胸径生长监测仪**通过工业级位移传感器、7×24 自动采集、≥10 年超长续航和 30 秒无损抱箍式安装，将传统人工测量升级为"设备长期记录变化"的数字化监测体系。同等监测任务仅需 **1 人 1 天**即可完成，数据准确率稳定在 **99.9%**，彻底扭转了传统外业低效、易错、高强度的作业现状。
+
+本仓库的 `forest-tree-net-client` SDK 正是该监测仪所属的**森林树径监测平台**官方 Java 客户端 —— 通过 SDK，你可以在自有 Java 应用中直接拉取传感器上报的样地、样木、设备、历史读数等数据。
 
 <table>
 <tr>
 <td width="55%" valign="top">
 
-**核心特性 / Key features**
+### 🎯 五大核心产品特性
 
-- 🎯 **±1 mm 精度** / millimeter accuracy
-- ⏱️ **7×24 实时监测** / continuous 7×24 monitoring
-- 🔋 **≥10 年续航** / 10-year battery life
-- 📡 **多通信方式** / 4G · NB-IoT · LoRa
-- 🌲 **30 秒无损安装** / 30-second strap install
-- 📊 **生长曲线自动生成** / automatic growth curves
+- 🎯 **毫米级精度** —— 采用工业级位移传感器，误差 ≤ ±1 mm
+- ⏱️ **7×24 实时监测** —— 全自动周期性采集与上传
+- 🔋 **≥10 年续航** —— 高能量密度电池组，一次安装长期守护
+- 📡 **多通信方式** —— 支持 4G / NB-IoT / LoRa
+- 📊 **智能数据管理** —— 自动生成生长曲线、可视化展示与合规导出
+- 🌲 **30 秒无损安装** —— 抱箍式、< 200g、不打孔不伤树皮
+
+### 🌲 相比传统测量的关键升级
+
+- ✅ **降低人工依赖** —— 减少重复外业树径测量工作量
+- ✅ **提升数据连续性** —— 支持长期树木生长动态监测
+- ✅ **提升数据一致性** —— 减少人工读数与记录误差
+- ✅ **优化管理效率** —— 数据自动上传与统一管理
+- ✅ **降低综合成本** —— 减少外业频次与运维投入
+- ✅ **支撑多场景监测** —— 适用于碳汇、国储林与样地监测体系建设
 
 </td>
 <td width="45%" align="center">
@@ -43,18 +56,21 @@ This SDK is the **software side** of an end-to-end forest-monitoring solution. T
 </tr>
 </table>
 
-**典型应用场景 / Typical applications**
+### 📋 典型应用场景
 
-| 场景 / Scenario | 一句话 / In one line |
+| 场景 | 说明 |
 | --- | --- |
-| 国有林场 / State forest | 全林分长期生长监测 / Continuous growth monitoring across stands |
-| 国储林 / Reserve forest | 多年度生长模型与上报 / Multi-year growth models and reporting |
-| 碳汇监测 / Carbon sink | 连续 DBH 增量 → 生物量 / 碳储量 / Continuous DBH → biomass / carbon |
-| 古树名木 / Heritage trees | 单株长期健康趋势 / Per-tree long-term health trend |
-| 样地监测 / Sample plots | 科研级连续时间序列 / Research-grade continuous time series |
-| 林木倾倒预警 / Tree-fall alert | 倾角实时监测 / Real-time tilt monitoring |
+| 🌲 **国有林场资源动态监测** | 全林分长期生长监测，支撑森林资源年度更新 |
+| 🏛️ **国储林建设管理** | 多年度生长模型与上报，服务国家储备林数字化建设 |
+| 🌍 **森林碳汇监测** | 连续 DBH 增量 → 生物量 / 碳储量核算，支撑碳汇项目 |
+| 🌳 **古树名木保护** | 单株长期健康趋势监测，识别生长异常与潜在风险 |
+| 🔬 **林业样地长期监测** | 科研级连续时间序列，服务高校与科研院所 |
+| 🏙️ **城市绿化与生态工程** | 城市树木生长状态监测与精细化管护 |
+| ⚠️ **林木倾倒风险预警** | 基于倾角传感的实时风险监测与预警分析 |
 
 👉 完整产品介绍、技术参数、应用案例：[docs/PRODUCT.md](./docs/PRODUCT.md) · [docs/USE_CASES.md](./docs/USE_CASES.md)
+
+> 📞 **售后服务**：四川恩特网联科技有限公司 — 139 0818 4356
 
 ---
 
